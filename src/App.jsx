@@ -153,22 +153,49 @@ export default function App() {
 
   // Handle Session
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session) fetchTenantData(session.user.id);
-      else setAppLoading(false);
-    });
+    let isMounted = true;
+
+    // Safety timeout: forza la disattivazione dello spinner dopo 1.5s max
+    const safetyTimer = setTimeout(() => {
+      if (isMounted) setAppLoading(false);
+    }, 1500);
+
+    const initSession = async () => {
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (isMounted) {
+          const activeSession = data?.session || null;
+          setSession(activeSession);
+          if (activeSession) {
+            await fetchTenantData(activeSession.user.id);
+          } else {
+            setAppLoading(false);
+          }
+        }
+      } catch (err) {
+        console.error('Errore inizializzazione sessione:', err);
+        if (isMounted) setAppLoading(false);
+      }
+    };
+
+    initSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!isMounted) return;
       setSession(session);
-      if (session) fetchTenantData(session.user.id);
-      else {
+      if (session) {
+        fetchTenantData(session.user.id);
+      } else {
         setTenant(null);
         setAppLoading(false);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      clearTimeout(safetyTimer);
+      subscription.unsubscribe();
+    };
   }, []);
 
   // Fetch all business & tenant data
