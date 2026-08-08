@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from './supabaseClient';
 import { 
   Plus, Trash2, Layout, Image, Palette, Share2, Printer, 
   ChevronRight, LogOut, Check, Sparkles, Download, ArrowLeft,
-  FileText, Smartphone, Monitor, ShoppingBag, Settings, Grid, Columns, BarChart2
+  FileText, Smartphone, Monitor, ShoppingBag, Settings, Grid, Columns, BarChart2,
+  Wand2, Upload, QrCode, Send, Eye, Edit3, Brain, FileSpreadsheet, X
 } from 'lucide-react';
 import './App.css';
 
@@ -102,6 +103,24 @@ export default function App() {
   
   // CSV Import States
   const [csvPreviewProducts, setCsvPreviewProducts] = useState([]);
+  const [showCsvImport, setShowCsvImport] = useState(false);
+  const [csvFile, setCsvFile] = useState(null);
+
+  // AI Copywriter States
+  const [showAiCopywriter, setShowAiCopywriter] = useState(false);
+  const [aiProductInput, setAiProductInput] = useState({ name: '', description: '' });
+  const [aiGeneratedText, setAiGeneratedText] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+
+  // Onboarding Wizard States
+  const [wizardStep, setWizardStep] = useState(1);
+  const [wizardData, setWizardData] = useState({ sector: '', logo: null, colors: BRAND_PALETTES[0] });
+
+  // Mobile Preview Toggle
+  const [mobilePreviewMode, setMobilePreviewMode] = useState(false);
+
+  // QR Code State
+  const [qrCodeValue, setQrCodeValue] = useState('');
 
   // Landing & Analytics States
   const [showAuthForm, setShowAuthForm] = useState(false);
@@ -408,6 +427,100 @@ export default function App() {
       .getPublicUrl(fileName);
 
     return data.publicUrl;
+  };
+
+  // CSV Import Handler
+  const handleCsvImport = (file) => {
+    setCsvFile(file);
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const parsedProducts = results.data.map((row, index) => ({
+          id: `csv-${index}`,
+          name: row.nome || row.name || '',
+          price: row.prezzo || row.price || '',
+          description: row.descrizione || row.description || '',
+          category: row.categoria || row.category || '',
+          image_url: row.immagine || row.image || ''
+        }));
+        setCsvPreviewProducts(parsedProducts);
+        setShowCsvImport(true);
+      }
+    });
+  };
+
+  const confirmCsvImport = async () => {
+    if (!csvPreviewProducts.length) return;
+    
+    setActionLoading(true);
+    try {
+      for (const product of csvPreviewProducts) {
+        await supabase.from('products').insert({
+          tenant_id: session.user.id,
+          name: product.name,
+          price: product.price,
+          description: product.description,
+          category: product.category,
+          image_url: product.image_url
+        });
+      }
+      alert(`${csvPreviewProducts.length} prodotti importati con successo!`);
+      setShowCsvImport(false);
+      setCsvPreviewProducts([]);
+      setCsvFile(null);
+      // Refresh products
+      fetchTenantData(session.user.id);
+    } catch (err) {
+      console.error('Errore importazione CSV:', err);
+      alert('Errore durante l\'importazione. Riprova.');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  // AI Copywriter Helper (Simulated - In production call n8n/Make webhook)
+  const generateAiCopy = async () => {
+    if (!aiProductInput.name && !aiProductInput.description) return;
+    
+    setAiLoading(true);
+    // Simulated AI response - replace with actual API call to n8n/OpenRouter
+    setTimeout(() => {
+      const templates = [
+        `🔥 OFFERTA IMPERDIBILE! ${aiProductInput.name} a soli €${aiProductInput.price || 'XX'}! ${aiProductInput.description ? aiProductInput.description : 'Qualità eccezionale per te.'} Affrettati, scorte limitate!`,
+        `✨ NOVITÀ ESCLUSIVA ✨ ${aiProductInput.name}. ${aiProductInput.description || 'Il miglior prodotto della categoria.'} Vieni a scoprirlo in negozio!`,
+        `💥 SUPER PREZZO 💥 ${aiProductInput.name} solo oggi a €${aiProductInput.price || 'XX'}! ${aiProductInput.description || 'Non perdere questa occasione unica.'} Ti aspettiamo!`
+      ];
+      const randomPick = templates[Math.floor(Math.random() * templates.length)];
+      setAiGeneratedText(randomPick);
+      setAiLoading(false);
+    }, 1500);
+  };
+
+  // Onboarding Wizard Handlers
+  const completeWizard = async () => {
+    setActionLoading(true);
+    try {
+      let logoUrl = tenant?.logo_url;
+      if (wizardData.logo) {
+        logoUrl = await handleImageUpload(wizardData.logo, 'logo');
+      }
+      
+      await supabase.from('tenants').update({
+        business_name: wizardData.businessName || editBusinessName,
+        brand_colors: { primary: wizardData.colors.primary, secondary: wizardData.colors.secondary },
+        logo_url: logoUrl,
+        sector: wizardData.sector,
+        setup_completed: true
+      }).eq('id', session.user.id);
+      
+      setWizardStep(1);
+      fetchTenantData(session.user.id);
+    } catch (err) {
+      console.error('Errore completamento wizard:', err);
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   // Color Extraction Utility
