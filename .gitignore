@@ -1,26 +1,370 @@
+```
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# Build outputs
+dist/
+build/
+target/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
 # Logs
-logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# OS generated files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
 
-.vercel
+# IDE specific
+.vscode/
+.idea/
+.git/
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Runtime data
+.pnp/
+.pnp.js
+
+# Local configuration
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug log
+debug.log
+
+# Security keys
+*.key
+*.pem
+*.crt
+*.cert
+
+# Database
+*.db
+*.db-journal
+
+# Testing
+.nyc_output/
+coverage/
+*.lcov
+
+# Distribution / packaging
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pipenv requirements.txt
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Sage
+.sage.py
+
+# Environments
+.envrc
+.env.local
+.env.shared
+.env.example
+.env.test
+.env.test.local
+.env.dev
+.env.dev.local
+.env.prod
+.env.prod.local
+.env.staging
+.env.staging.local
+.env.backup
+
+# Legacy
+.settings/
+.fbprefs
+.metadata
+.tern-project
+.tern-port
+.reattach-to-user-namespace.pid
+ackrc
+gemfiles/
+nbproject/
+nbbuild/
+nbdist/
+nbreleases/
+.mvn/timing.properties
+.mvn/wrapper/
+mvnw
+mvnw.cmd
+HELP.md
+MANIFEST.MF
+META-INF/
+*.war
+*.jar
+*.ear
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.m2/
+.settings/
+deploy.properties
+sonar-report.json
+target/
+.gradle/
+build/
+!src/main/**
+!src/test/**
+
+# Android Studio
+*.iml
+*.iws
+*.bat
+*.sh
+**/local.properties
+**/gen/**/*
+**/bin/**/*
+**/obj/**/*
+**/proguard/**/*
+**/.gradle/**/*
+**/build/**/*
+!**/src/main/**/*
+!**/src/androidTest/**/*
+!**/src/test/**/*
+**/logs/**/*
+**/tmp/**/*
+**/temp/**/*
+**/target/**/*
+**/out/**/*
+**/.settings/**/*
+**/.idea/**/*
+**/.externalToolBuilders/**/*
+**/.launch/**/*
+**/.project/**/*
+**/.classpath/**/*
+**/.git/**/*
+**/.svn/**/*
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ IDEA
+.idea/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# Vim
+*.un~
+Session.vim
+.netrwhist
+*~
+.sw[a-p]
+
+# Emacs
+*~
+\#*\#
+/\?.*elc
+auto-save-list
+tramp
+.\#*
+
+# Chrome
+# Google Chrome/Chromium Passwords: Not to be shared
+# Google Chrome/Chromium Preferences: Not to be shared
+# Google Chrome/Chromium Bookmarks: Not to be shared
+# Google Chrome/Chromium History: Not to be shared
+# Google Chrome/Chromium Last Session: Not to be shared
+# Google Chrome/Chromium Current Session: Not to be shared
+# Google Chrome/Chromium Top Sites: Not to be shared
+# Google Chrome/Chromium Current Tabs: Not to be shared
+# Google Chrome/Chromium Last Tabs: Not to be shared
+# Google Chrome/Chromium Favicon: Not to be shared
+# Google Chrome/Chromium Web Data: Not to be shared
+# Google Chrome/Chromium Login Data: Not to be shared
+# Google Chrome/Chromium Login Data For Account: Not to be shared
+# Google Chrome/Chromium Cookies: Not to be shared
+# Google Chrome/Chromium Bookmarks Backup: Not to be shared
+# Google Chrome/Chromium Shortcuts: Not to be shared
+# Google Chrome/Chromium Top Sites Backup: Not to be shared
+# Google Chrome/Chromium Current Session Backup: Not to be shared
+# Google Chrome/Chromium Last Session Backup: Not to be shared
+# Google Chrome/Chromium Current Tabs Backup: Not to be shared
+# Google Chrome/Chromium Last Tabs Backup: Not to be shared
+# Google Chrome/Chromium Favicon Index: Not to be shared
+# Google Chrome/Chromium Quota Manager: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup-journal: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup-journal: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup-journal: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup-journal: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup-journal: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be shared
+# Google Chrome/Chromium Network Action Predictor-journal: Not to be shared
+# Google Chrome/Chromium Network Prediction-journal: Not to be shared
+# Google Chrome/Chromium Top Sites Backup-journal: Not to be shared
+# Google Chrome/Chromium Web Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data-journal: Not to be shared
+# Google Chrome/Chromium Login Data For Account-journal: Not to be shared
+# Google Chrome/Chromium Cookies-journal: Not to be shared
+# Google Chrome/Chromium Favicon Index-journal: Not to be shared
+# Google Chrome/Chromium Quota Manager-journal: Not to be......
+```
