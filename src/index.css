@@ -1,0 +1,19 @@
+/* Base reset and normalizations */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.5;
+  background-color: #141211;
+  color: #f5f2ed;
+}
